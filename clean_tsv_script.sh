@@ -21,13 +21,13 @@ sed 's/^[ \t]*//' 2.tmp > 3.tmp
 # Alle Zeilen entfernen die nicht mit der ISSN nach dem Schema 1234-5678 beginnen
 # ^ = Anfang der Zeile
 # [A-Z0-9] = Großbuchstaben und Zahlen
-# \{4\} = genau 4 mal. Geschweifte Klammern müssen in der Shell mit einem Backslash (\) Escaped werden.
-# /!d = lösche die Zeilen in denen die Zeichenfolge NICHT vorkommt (deswegen das !)
+# \{4\} = genau 4 mal
+# /!d = lösche die Zeilen in denen die Zeichenfolge NICHT vorkommt (!)
 sed '/^[A-Z0-9]\{4\}-[A-Z0-9]\{4\}/!d' 3.tmp > 4.tmp
 
 # Sortieren & Duplikate entfernen
 sort 4.tmp | uniq > 5.tmp
 
-# Aufräumen
+# Aufräumen (temporäre Dateien löschen)
 cp 5.tmp $Ausgabedatei
 rm *.tmp
